@@ -1,0 +1,1 @@
+For this task, I used the WorldBank data set in the animint package and visualized it as a scatter plot. Then I used animint to display it on the web page, and then published it online on GitHub with gistr. This task made me learn a lot of new knowledge.
