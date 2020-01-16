@@ -1,0 +1,1 @@
+First analyze the data set and find that you can use brand as the reference value to calculate the standard deviation of the corresponding variable for each brand. This can reduce the data and make the data more intuitive. In this task, I learned how to sum the rows and columns of the data set. And a combination of datasets.
