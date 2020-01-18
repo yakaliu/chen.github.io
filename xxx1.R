@@ -17,12 +17,6 @@ brand<-text1$brand
 #Standardize the data对数据进行标准化
 text1<-scale(text1[,2:10])
 
-#Conversion data type, add brand column转化数据类型，添加brand列
-text1<-as.data.frame(text1)
-text1<-cbind(brand,text1)
-
-#Transform data into long format and visualize with bar chart转化数据为长格式，用条形图可视化
-text1<-melt(text1,id=c("brand"))
-ggplot(data=text1,aes(x=variable,y=value,fill=brand))+
-  geom_col(position = position_dodge())
-
+#The correlation coefficient of variables is calculated by cor function and visualized by corrplot使用cor函数计算变量相关系数，用corrplot进行可视化
+text1<-cor(text1)
+corrplot(corr=text1)
