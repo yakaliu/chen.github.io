@@ -1,48 +1,28 @@
 library(ggplot2)
+library(reshape2)
 
 #Loading data
 text<-read.csv("https://raw.githubusercontent.com/FahroziFahrozi/Google-Code-In-Task/master/Consumer%20dataset.csv")
 head(text)
 
-#Calculate the standard deviation of different parameters for each brand, and then combine them into new data
-new.function <- function(text)
-{
-  brand<-c("a","b","c","d","e","f","g","h","i","j")
-  perform<-c(rep(1,10))
-  latest<-c(rep(1,10))
-  fun<-c(rep(1,10))
-  serious<-c(rep(1,10))
-  bargain<-c(rep(1,10))
-  value<-c(rep(1,10))
-  trendy<-c(rep(1,10))
-  rebuy<-c(rep(1,10))
-  x<-0
-  for(i in c)
-  {
-    x<-x+1
-    print(x)
-    text1<-subset(text,brand==i)
-    print(head(text1))
-    perform[x]<-sd(text1$perform)
-    latest[x]<-sd(text1$latest)
-    fun[x]<-sd(text1$fun)
-    serious[x]<-sd(text1$serious)
-    bargain[x]<-sd(text1$bargain)
-    value[x]<-sd(text1$value)
-    trendy[x]<-sd(text1$trendy)
-    rebuy[x]<-sd(text1$rebuy)
-  }
-  text<-data.frame(brand,perform,latest,fun,serious,bargain,value,trendy,rebuy)
-  return(text)
-}
-text<-new.function(text)
-text
+#Show data properties and summary显示数据性质和摘要
+str(text)
+summary(text)
 
-#Visualization
-scatter <- ggplot()+
-  geom_point(
-    mapping=aes(x=perform, y=value, colour=brand),
-    data=text)
-scatter
+#Split and average data reorganization对数据进行拆分和平均值重组
+text1<-melt(text,id=c("brand"))
+text1<-dcast(text1,brand~variable,mean)
+brand<-text1$brand
 
+#Standardize the data对数据进行标准化
+text1<-scale(text1[,2:10])
+
+#Conversion data type, add brand column转化数据类型，添加brand列
+text1<-as.data.frame(text1)
+text1<-cbind(brand,text1)
+
+#Transform data into long format and visualize with bar chart转化数据为长格式，用条形图可视化
+text1<-melt(text1,id=c("brand"))
+ggplot(data=text3,aes(x=variable,y=value,fill=brand))+
+  geom_col(position = position_dodge())
 
