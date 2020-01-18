@@ -23,6 +23,6 @@ text1<-cbind(brand,text1)
 
 #Transform data into long format and visualize with bar chart转化数据为长格式，用条形图可视化
 text1<-melt(text1,id=c("brand"))
-ggplot(data=text3,aes(x=variable,y=value,fill=brand))+
+ggplot(data=text1,aes(x=variable,y=value,fill=brand))+
   geom_col(position = position_dodge())
 
