@@ -25,6 +25,17 @@ year<-c("2018","2019")
 #Visualize bar charts of variables, comparing 2018 and 2019
 new_text<-data.frame(year,name,members,country,city)
 new_text
-new_text1<-melt(new_text,id=c("year"))
-ggplot(data=new_text1,aes(x=variable,y=value,fill=year))+
- geom_col(position = position_dodge())
+
+#Visualize for each data为每个数据可视化
+#name
+ggplot(data=new_text,aes(x=year,y=name,fill=year))+
+ geom_bar(stat="identity")
+#members
+ggplot(data=new_text,aes(x=year,y=members,fill=year))+
+ geom_bar(stat="identity")
+#country
+ggplot(data=new_text,aes(x=year,y=country,fill=year))+
+ geom_bar(stat="identity")
+#city
+ggplot(data=new_text,aes(x=year,y=city,fill=year))+
+ geom_bar(stat="identity")
